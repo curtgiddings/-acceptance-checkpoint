@@ -15,10 +15,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-stone-50">
-        <main className="max-w-md mx-auto px-6 py-12">
-          <Link href="/" className="block mb-12">
+        <header className="px-6 py-8">
+          <Link href="/">
             <p className="font-serif text-lg text-stone-900">themissinga.org</p>
           </Link>
+        </header>
+        <main className="max-w-md mx-auto px-6 pb-12">
           {children}
         </main>
       </body>
