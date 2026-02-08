@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-stone-50">
-        <header className="px-6 py-8">
+        <header className="p-8">
           <Link href="/">
             <p className="font-serif text-lg text-stone-900">themissinga.org</p>
           </Link>
