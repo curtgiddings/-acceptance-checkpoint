@@ -20,8 +20,8 @@ export default function RootLayout({
       <body className="min-h-screen bg-stone-50">
         <header className="p-8">
           <Link href="/">
-            <p className="font-serif text-lg text-stone-900 border-l-4 border-stone-900 pl-3">
-              themissing<span className="font-bold text-amber-600">A</span>.org
+            <p className="font-serif text-lg text-stone-900 border-l-4 border-amber-500 pl-3">
+              themissing<span className="font-semibold text-amber-600">A</span>.org
             </p>
           </Link>
         </header>
