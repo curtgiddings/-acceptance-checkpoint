@@ -5,6 +5,9 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'Acceptance Checkpoint | themissinga.org',
   description: 'Ensure goals are genuinely accepted — not just assigned.',
+  icons: {
+    icon: '/favicon.svg',
+  },
 }
 
 export default function RootLayout({
@@ -17,7 +20,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-stone-50">
         <header className="p-8">
           <Link href="/">
-            <p className="font-serif text-lg text-stone-900">themissinga.org</p>
+            <p className="font-serif text-lg text-stone-900 drop-shadow-sm hover:drop-shadow transition-all">themissinga.org</p>
           </Link>
         </header>
         <main className="max-w-md mx-auto px-6 pb-12">
