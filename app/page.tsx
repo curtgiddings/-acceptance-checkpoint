@@ -3,11 +3,6 @@ import Link from 'next/link'
 export default function Home() {
   return (
     <div className="animate-fade-in">
-      {/* Brand */}
-      <div className="mb-16">
-        <p className="text-xs font-medium tracking-wide text-stone-900">themissinga.org</p>
-      </div>
-
       {/* Header */}
       <div className="text-center mb-16">
         <p className="text-[10px] uppercase tracking-[0.35em] text-stone-400 mb-6">
