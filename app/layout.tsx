@@ -1,0 +1,23 @@
+import type { Metadata } from 'next'
+import './globals.css'
+
+export const metadata: Metadata = {
+  title: 'Acceptance Checkpoint',
+  description: 'Ensure goals are genuinely accepted — not just assigned.',
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body className="min-h-screen bg-stone-50">
+        <main className="max-w-md mx-auto px-6 py-12">
+          {children}
+        </main>
+      </body>
+    </html>
+  )
+}
