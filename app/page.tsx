@@ -20,19 +20,23 @@ export default function Home() {
         >
           I&apos;M SETTING A GOAL
         </Link>
-        
         <Link
           href="/review"
           className="block w-full py-4 border-2 border-stone-900 text-stone-900 text-center font-medium tracking-wide hover:bg-stone-900 hover:text-white transition-colors"
         >
           I RECEIVED A GOAL
         </Link>
+        <Link
+          href="/demo"
+          className="block w-full py-4 border-2 border-amber-500 text-amber-700 text-center font-medium tracking-wide hover:bg-amber-500 hover:text-white transition-colors"
+        >
+          SEE A DEMO
+        </Link>
       </div>
       <div className="border-t border-stone-200 pt-12 mb-12">
         <p className="text-[10px] uppercase tracking-[0.35em] text-stone-400 mb-8 text-center">
           How It Works
         </p>
-        
         <div className="flex justify-between text-center max-w-xs mx-auto">
           <div>
             <p className="font-serif text-3xl text-stone-900 mb-2">01</p>
