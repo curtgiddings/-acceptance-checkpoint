@@ -22,7 +22,7 @@ export default function RootLayout({
               themissing<span className="font-semibold text-amber-600">A</span>.org
             </p>
           </Link>
-          <Link href="/demo" className="text-sm font-medium tracking-wider text-amber-600 hover:text-white border-2 border-amber-500 hover:bg-amber-500 px-4 py-2 transition-colors">
+          <Link href="/demo" className="text-xs font-medium tracking-wider text-white bg-stone-900 hover:bg-stone-700 px-5 py-2 transition-colors">
             DEMO
           </Link>
         </header>
