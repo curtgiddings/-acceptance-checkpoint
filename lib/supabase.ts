@@ -1,10 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
-
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
-
 // Types
 export interface Checkpoint {
   id: string
@@ -30,10 +27,12 @@ export interface Checkpoint {
   setter_dependencies: string | null
   setter_q1: boolean | null
   setter_q2: boolean | null
+  setter_confidence: string | null
   setter_completed_at: string | null
   
   receiver_questions: string | null
   receiver_concerns: string | null
+  receiver_confidence: string | null
   receiver_reviewed_at: string | null
   
   live_q1: boolean | null
@@ -44,7 +43,6 @@ export interface Checkpoint {
   accepted: boolean
   accepted_at: string | null
 }
-
 export interface CheckpointFile {
   id: string
   checkpoint_id: string
@@ -54,7 +52,6 @@ export interface CheckpointFile {
   storage_path: string
   uploaded_at: string
 }
-
 // Database functions
 export async function createCheckpoint(data: Partial<Checkpoint>): Promise<Checkpoint | null> {
   const { data: checkpoint, error } = await supabase
@@ -69,7 +66,6 @@ export async function createCheckpoint(data: Partial<Checkpoint>): Promise<Check
   }
   return checkpoint
 }
-
 export async function getCheckpoint(id: string): Promise<Checkpoint | null> {
   const { data: checkpoint, error } = await supabase
     .from('checkpoints')
@@ -83,7 +79,6 @@ export async function getCheckpoint(id: string): Promise<Checkpoint | null> {
   }
   return checkpoint
 }
-
 export async function updateCheckpoint(id: string, data: Partial<Checkpoint>): Promise<Checkpoint | null> {
   const { data: checkpoint, error } = await supabase
     .from('checkpoints')
@@ -98,7 +93,6 @@ export async function updateCheckpoint(id: string, data: Partial<Checkpoint>): P
   }
   return checkpoint
 }
-
 export async function getCheckpointFiles(checkpointId: string): Promise<CheckpointFile[]> {
   const { data: files, error } = await supabase
     .from('checkpoint_files')
@@ -111,7 +105,6 @@ export async function getCheckpointFiles(checkpointId: string): Promise<Checkpoi
   }
   return files || []
 }
-
 export async function uploadFile(checkpointId: string, file: File): Promise<CheckpointFile | null> {
   const filePath = `${checkpointId}/${Date.now()}_${file.name}`
   
@@ -145,7 +138,6 @@ export async function uploadFile(checkpointId: string, file: File): Promise<Chec
   
   return fileRecord
 }
-
 export async function getFileUrl(storagePath: string): Promise<string | null> {
   const { data } = await supabase.storage
     .from('checkpoint-files')
