@@ -29,6 +29,7 @@ export default function NewCheckpoint() {
     dependencies: '',
     setterQ1: null as boolean | null,
     setterQ2: null as boolean | null,
+    setterConfidence: '' as string,
   })
   
   const [files, setFiles] = useState<File[]>([])
@@ -70,6 +71,7 @@ export default function NewCheckpoint() {
       setter_dependencies: form.dependencies,
       setter_q1: form.setterQ1,
       setter_q2: form.setterQ2,
+      setter_confidence: form.setterConfidence || null,
       setter_completed_at: new Date().toISOString(),
       status: 'pending_receiver'
     })
@@ -189,6 +191,29 @@ export default function NewCheckpoint() {
               value={form.context}
               onChange={(e) => setForm({...form, context: e.target.value})}
             />
+          </div>
+
+          {/* Confidence */}
+          <div>
+            <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">
+              Likelihood of Hitting This Goal
+            </label>
+            <div className="grid grid-cols-3 gap-2">
+              {['Low', 'Medium', 'High'].map(level => (
+                <button
+                  key={level}
+                  type="button"
+                  onClick={() => setForm({...form, setterConfidence: level.toLowerCase()})}
+                  className={`py-3 text-sm font-medium transition-colors ${
+                    form.setterConfidence === level.toLowerCase()
+                      ? 'bg-stone-900 text-white'
+                      : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                  }`}
+                >
+                  {level}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -482,7 +507,7 @@ export default function NewCheckpoint() {
           </button>
         </div>
         
-        <a
+        
           href={`mailto:${form.receiverEmail}?subject=${encodeURIComponent(`Please review: ${form.goalDescription}`)}&body=${encodeURIComponent(`Hi ${form.receiverName},
 
 I'd like to discuss a goal with you. Before we meet, please take a few minutes to review the details and note any questions or concerns:
