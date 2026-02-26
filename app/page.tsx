@@ -1,8 +1,7 @@
 import Link from 'next/link'
 export default function Home() {
   return (
-    <div className="animate-fade-in relative">
-      <Link href="/demo" className="absolute top-0 right-0 text-xs font-medium tracking-wide text-amber-600 hover:text-amber-800 transition-colors border border-amber-400 px-3 py-1.5">DEMO</Link>
+    <div className="animate-fade-in">
       <div className="text-center mb-16">
         <p className="text-[10px] uppercase tracking-[0.35em] text-stone-400 mb-6">
           Goal Setting Framework
