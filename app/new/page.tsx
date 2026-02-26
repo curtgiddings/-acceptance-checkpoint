@@ -87,11 +87,9 @@ export default function NewCheckpoint() {
     setIsSubmitting(false)
   }
 
-  // Step 1: Define the Goal
   if (step === 'goal') {
     return (
       <div className="animate-fade-in">
-        {/* Progress */}
         <div className="flex justify-center gap-4 mb-12">
           <div className="text-center">
             <p className="font-serif text-2xl text-stone-900">01</p>
@@ -193,7 +191,6 @@ export default function NewCheckpoint() {
             />
           </div>
 
-          {/* Confidence */}
           <div>
             <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">
               Likelihood of Hitting This Goal
@@ -217,7 +214,6 @@ export default function NewCheckpoint() {
           </div>
         </div>
 
-        {/* Source */}
         <div className="mt-10 pt-10 border-t border-stone-200">
           <p className="text-[10px] uppercase tracking-wider text-stone-500 mb-4">Target Source</p>
           
@@ -289,7 +285,6 @@ export default function NewCheckpoint() {
           )}
         </div>
 
-        {/* Navigation */}
         <div className="flex justify-between mt-12">
           <button
             onClick={() => router.push('/')}
@@ -309,11 +304,9 @@ export default function NewCheckpoint() {
     )
   }
 
-  // Step 2: Assumptions
   if (step === 'assumptions') {
     return (
       <div className="animate-fade-in">
-        {/* Progress */}
         <div className="flex justify-center gap-4 mb-12">
           <div className="text-center">
             <p className="font-serif text-2xl text-stone-400">01</p>
@@ -328,7 +321,6 @@ export default function NewCheckpoint() {
           </div>
         </div>
 
-        {/* Goal Summary */}
         <div className="bg-stone-100 p-6 mb-10">
           <p className="text-[10px] uppercase tracking-wider text-stone-500 mb-2">The Goal</p>
           <p className="font-serif text-lg text-stone-900">{form.goalDescription}</p>
@@ -383,7 +375,6 @@ export default function NewCheckpoint() {
           </div>
         </div>
 
-        {/* Commitment Questions */}
         <div className="mt-10 pt-10 border-t border-stone-200 space-y-4">
           <div className={`p-6 border-2 transition-colors ${
             form.setterQ1 === null ? 'border-stone-200' : (form.setterQ1 ? 'border-stone-900 bg-stone-50' : 'border-amber-500 bg-amber-50')
@@ -450,7 +441,6 @@ export default function NewCheckpoint() {
           </div>
         </div>
 
-        {/* Navigation */}
         <div className="flex justify-between mt-12">
           <button
             onClick={() => setStep('goal')}
@@ -470,7 +460,6 @@ export default function NewCheckpoint() {
     )
   }
 
-  // Step 3: Complete
   return (
     <div className="animate-fade-in text-center">
       <div className="mb-10">
@@ -485,7 +474,6 @@ export default function NewCheckpoint() {
         </p>
       </div>
 
-      {/* Share Link */}
       <div className="bg-stone-100 p-6 mb-6 text-left">
         <p className="text-[10px] uppercase tracking-wider text-stone-500 mb-3">Share Link</p>
         <div className="flex gap-2">
@@ -508,24 +496,13 @@ export default function NewCheckpoint() {
         </div>
         
         
-          href={`mailto:${form.receiverEmail}?subject=${encodeURIComponent(`Please review: ${form.goalDescription}`)}&body=${encodeURIComponent(`Hi ${form.receiverName},
-
-I'd like to discuss a goal with you. Before we meet, please take a few minutes to review the details and note any questions or concerns:
-
-${typeof window !== 'undefined' ? window.location.origin : ''}/c/${checkpointId}
-
-Goal: ${form.goalDescription}
-Target: ${form.targetValue} by ${form.deadline}
-
-Thanks,
-${form.setterName}`)}`}
+          href={`mailto:${form.receiverEmail}?subject=${encodeURIComponent(`Please review: ${form.goalDescription}`)}&body=${encodeURIComponent(`Hi ${form.receiverName},\n\nI'd like to discuss a goal with you. Before we meet, please take a few minutes to review the details and note any questions or concerns:\n\n${typeof window !== 'undefined' ? window.location.origin : ''}/c/${checkpointId}\n\nGoal: ${form.goalDescription}\nTarget: ${form.targetValue} by ${form.deadline}\n\nThanks,\n${form.setterName}`)}`}
           className="block w-full mt-4 py-3 border-2 border-stone-900 text-stone-900 font-medium text-sm text-center hover:bg-stone-900 hover:text-white transition-colors"
         >
           SEND VIA EMAIL
         </a>
       </div>
 
-      {/* Preview */}
       <div className="bg-stone-100 p-6 mb-10 text-left">
         <p className="text-[10px] uppercase tracking-wider text-stone-500 mb-3">
           What {form.receiverName} Will See
@@ -538,7 +515,6 @@ ${form.setterName}`)}`}
         </ul>
       </div>
 
-      {/* Live Session */}
       <button
         onClick={() => router.push(`/c/${checkpointId}/session`)}
         className="w-full py-4 bg-stone-900 text-white font-medium tracking-wide hover:bg-stone-800 transition-colors mb-3"
