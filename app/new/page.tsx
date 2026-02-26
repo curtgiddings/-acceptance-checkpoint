@@ -13,7 +13,6 @@ export default function NewCheckpoint() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [checkpointId, setCheckpointId] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
-  
   const [form, setForm] = useState({
     setterName: '',
     receiverName: '',
@@ -31,7 +30,6 @@ export default function NewCheckpoint() {
     setterQ2: null as boolean | null,
     setterConfidence: '' as string,
   })
-  
   const [files, setFiles] = useState<File[]>([])
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +52,6 @@ export default function NewCheckpoint() {
   const handleSubmit = async () => {
     setIsSubmitting(true)
     const id = nanoid(9)
-    
     const checkpoint = await createCheckpoint({
       id,
       goal_description: form.goalDescription,
@@ -75,7 +72,6 @@ export default function NewCheckpoint() {
       setter_completed_at: new Date().toISOString(),
       status: 'pending_receiver'
     })
-
     if (checkpoint) {
       for (const file of files) {
         await uploadFile(id, file)
@@ -83,7 +79,6 @@ export default function NewCheckpoint() {
       setCheckpointId(id)
       setStep('complete')
     }
-    
     setIsSubmitting(false)
   }
 
@@ -103,202 +98,77 @@ export default function NewCheckpoint() {
             <p className="text-[10px] uppercase tracking-wider text-stone-300">Assumptions</p>
           </div>
         </div>
-
-        <h1 className="font-serif text-3xl font-light text-stone-900 mb-2 text-center">
-          Define the Goal
-        </h1>
-        <p className="text-stone-500 text-sm mb-10 text-center">
-          What are you asking them to achieve?
-        </p>
-
+        <h1 className="font-serif text-3xl font-light text-stone-900 mb-2 text-center">Define the Goal</h1>
+        <p className="text-stone-500 text-sm mb-10 text-center">What are you asking them to achieve?</p>
         <div className="space-y-6">
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">Your Name</label>
-              <input
-                type="text"
-                className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400"
-                placeholder="Sarah Chen"
-                value={form.setterName}
-                onChange={(e) => setForm({...form, setterName: e.target.value})}
-              />
+              <input type="text" className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400" placeholder="Sarah Chen" value={form.setterName} onChange={(e) => setForm({...form, setterName: e.target.value})} />
             </div>
             <div>
               <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">Their Name</label>
-              <input
-                type="text"
-                className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400"
-                placeholder="Alex Kim"
-                value={form.receiverName}
-                onChange={(e) => setForm({...form, receiverName: e.target.value})}
-              />
+              <input type="text" className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400" placeholder="Alex Kim" value={form.receiverName} onChange={(e) => setForm({...form, receiverName: e.target.value})} />
             </div>
           </div>
-
           <div>
             <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">Their Email</label>
-            <input
-              type="email"
-              className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400"
-              placeholder="alex@company.com"
-              value={form.receiverEmail}
-              onChange={(e) => setForm({...form, receiverEmail: e.target.value})}
-            />
+            <input type="email" className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400" placeholder="alex@company.com" value={form.receiverEmail} onChange={(e) => setForm({...form, receiverEmail: e.target.value})} />
           </div>
-
           <div>
             <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">Goal Description</label>
-            <textarea
-              className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400 resize-none"
-              rows={3}
-              placeholder="What specifically are you asking them to achieve?"
-              value={form.goalDescription}
-              onChange={(e) => setForm({...form, goalDescription: e.target.value})}
-            />
+            <textarea className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400 resize-none" rows={3} placeholder="What specifically are you asking them to achieve?" value={form.goalDescription} onChange={(e) => setForm({...form, goalDescription: e.target.value})} />
           </div>
-
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">Target</label>
-              <input
-                type="text"
-                className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400"
-                placeholder="$500K"
-                value={form.targetValue}
-                onChange={(e) => setForm({...form, targetValue: e.target.value})}
-              />
+              <input type="text" className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400" placeholder="$500K" value={form.targetValue} onChange={(e) => setForm({...form, targetValue: e.target.value})} />
             </div>
             <div>
               <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">Deadline</label>
-              <input
-                type="text"
-                className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400"
-                placeholder="March 31"
-                value={form.deadline}
-                onChange={(e) => setForm({...form, deadline: e.target.value})}
-              />
+              <input type="text" className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400" placeholder="March 31" value={form.deadline} onChange={(e) => setForm({...form, deadline: e.target.value})} />
             </div>
           </div>
-
           <div>
             <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">Context</label>
-            <textarea
-              className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400 resize-none"
-              rows={2}
-              placeholder="Why is this target important?"
-              value={form.context}
-              onChange={(e) => setForm({...form, context: e.target.value})}
-            />
+            <textarea className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400 resize-none" rows={2} placeholder="Why is this target important?" value={form.context} onChange={(e) => setForm({...form, context: e.target.value})} />
           </div>
-
           <div>
-            <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">
-              Likelihood of Hitting This Goal
-            </label>
+            <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">Likelihood of Hitting This Goal</label>
             <div className="grid grid-cols-3 gap-2">
               {['Low', 'Medium', 'High'].map(level => (
-                <button
-                  key={level}
-                  type="button"
-                  onClick={() => setForm({...form, setterConfidence: level.toLowerCase()})}
-                  className={`py-3 text-sm font-medium transition-colors ${
-                    form.setterConfidence === level.toLowerCase()
-                      ? 'bg-stone-900 text-white'
-                      : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
-                  }`}
-                >
-                  {level}
-                </button>
+                <button key={level} type="button" onClick={() => setForm({...form, setterConfidence: level.toLowerCase()})} className={`py-3 text-sm font-medium transition-colors ${form.setterConfidence === level.toLowerCase() ? 'bg-stone-900 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'}`}>{level}</button>
               ))}
             </div>
           </div>
         </div>
-
         <div className="mt-10 pt-10 border-t border-stone-200">
           <p className="text-[10px] uppercase tracking-wider text-stone-500 mb-4">Target Source</p>
-          
           <div className="grid grid-cols-2 gap-2 mb-4">
-            {[
-              { id: 'bi_report', label: 'BI Report' },
-              { id: 'leadership_email', label: 'Leadership' },
-              { id: 'planning_doc', label: 'Planning Doc' },
-              { id: 'verbal', label: 'Verbal' },
-            ].map(source => (
-              <button
-                key={source.id}
-                type="button"
-                onClick={() => setForm({...form, sourceType: source.id})}
-                className={`py-3 text-sm font-medium transition-colors ${
-                  form.sourceType === source.id 
-                    ? 'bg-stone-900 text-white' 
-                    : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
-                }`}
-              >
-                {source.label}
-              </button>
+            {[{id:'bi_report',label:'BI Report'},{id:'leadership_email',label:'Leadership'},{id:'planning_doc',label:'Planning Doc'},{id:'verbal',label:'Verbal'}].map(source => (
+              <button key={source.id} type="button" onClick={() => setForm({...form, sourceType: source.id})} className={`py-3 text-sm font-medium transition-colors ${form.sourceType === source.id ? 'bg-stone-900 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'}`}>{source.label}</button>
             ))}
           </div>
-
-          <input
-            type="text"
-            className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400 mb-4"
-            placeholder="Brief description (optional)"
-            value={form.sourceDescription}
-            onChange={(e) => setForm({...form, sourceDescription: e.target.value})}
-          />
-
-          <div 
-            className="border-2 border-dashed border-stone-300 p-8 text-center cursor-pointer hover:border-stone-400 hover:bg-stone-100 transition-colors"
-            onClick={() => document.getElementById('file-upload')?.click()}
-          >
-            <input
-              id="file-upload"
-              type="file"
-              multiple
-              className="hidden"
-              accept=".pdf,.xlsx,.xls,.doc,.docx,.ppt,.pptx,.png,.jpg,.jpeg,.csv"
-              onChange={handleFileChange}
-            />
-            <p className="text-stone-500 text-sm">
-              Attach source documents
-            </p>
-            <p className="text-stone-400 text-xs mt-1">
-              PDF, Excel, Word, PowerPoint
-            </p>
+          <input type="text" className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400 mb-4" placeholder="Brief description (optional)" value={form.sourceDescription} onChange={(e) => setForm({...form, sourceDescription: e.target.value})} />
+          <div className="border-2 border-dashed border-stone-300 p-8 text-center cursor-pointer hover:border-stone-400 hover:bg-stone-100 transition-colors" onClick={() => document.getElementById('file-upload')?.click()}>
+            <input id="file-upload" type="file" multiple className="hidden" accept=".pdf,.xlsx,.xls,.doc,.docx,.ppt,.pptx,.png,.jpg,.jpeg,.csv" onChange={handleFileChange} />
+            <p className="text-stone-500 text-sm">Attach source documents</p>
+            <p className="text-stone-400 text-xs mt-1">PDF, Excel, Word, PowerPoint</p>
           </div>
-          
           {files.length > 0 && (
             <div className="mt-4 space-y-2">
               {files.map((file, i) => (
                 <div key={i} className="flex items-center justify-between py-3 px-4 bg-stone-100">
                   <span className="text-sm text-stone-700 truncate">{file.name}</span>
-                  <button
-                    type="button"
-                    onClick={() => removeFile(i)}
-                    className="text-stone-400 hover:text-stone-900 transition-colors"
-                  >
-                    ✕
-                  </button>
+                  <button type="button" onClick={() => removeFile(i)} className="text-stone-400 hover:text-stone-900 transition-colors">&#10005;</button>
                 </div>
               ))}
             </div>
           )}
         </div>
-
         <div className="flex justify-between mt-12">
-          <button
-            onClick={() => router.push('/')}
-            className="text-stone-500 text-sm hover:text-stone-900 transition-colors"
-          >
-            ← Back
-          </button>
-          <button
-            onClick={() => setStep('assumptions')}
-            disabled={!form.goalDescription || !form.setterName || !form.receiverName}
-            className="px-8 py-3 bg-stone-900 text-white font-medium tracking-wide hover:bg-stone-800 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-          >
-            CONTINUE
-          </button>
+          <button onClick={() => router.push('/')} className="text-stone-500 text-sm hover:text-stone-900 transition-colors">&larr; Back</button>
+          <button onClick={() => setStep('assumptions')} disabled={!form.goalDescription || !form.setterName || !form.receiverName} className="px-8 py-3 bg-stone-900 text-white font-medium tracking-wide hover:bg-stone-800 disabled:opacity-30 disabled:cursor-not-allowed transition-colors">CONTINUE</button>
         </div>
       </div>
     )
@@ -320,141 +190,46 @@ export default function NewCheckpoint() {
             <p className="text-[10px] uppercase tracking-wider text-stone-900">Assumptions</p>
           </div>
         </div>
-
         <div className="bg-stone-100 p-6 mb-10">
           <p className="text-[10px] uppercase tracking-wider text-stone-500 mb-2">The Goal</p>
           <p className="font-serif text-lg text-stone-900">{form.goalDescription}</p>
           <p className="text-sm text-stone-500 mt-1">{form.targetValue} by {form.deadline}</p>
         </div>
-
-        <h1 className="font-serif text-3xl font-light text-stone-900 mb-2 text-center">
-          Your Assumptions
-        </h1>
-        <p className="text-stone-500 text-sm mb-10 text-center">
-          Help {form.receiverName} understand what&apos;s behind the number.
-        </p>
-
+        <h1 className="font-serif text-3xl font-light text-stone-900 mb-2 text-center">Your Assumptions</h1>
+        <p className="text-stone-500 text-sm mb-10 text-center">Help {form.receiverName} understand what&apos;s behind the number.</p>
         <div className="space-y-6">
           <div>
-            <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">
-              Assumptions this target is based on
-            </label>
-            <textarea
-              className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400 resize-none"
-              rows={2}
-              placeholder="e.g., Product launches on time, budget stays flat..."
-              value={form.assumptions}
-              onChange={(e) => setForm({...form, assumptions: e.target.value})}
-            />
+            <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">Assumptions this target is based on</label>
+            <textarea className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400 resize-none" rows={2} placeholder="e.g., Product launches on time, budget stays flat..." value={form.assumptions} onChange={(e) => setForm({...form, assumptions: e.target.value})} />
           </div>
-
           <div>
-            <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">
-              Constraints {form.receiverName} should know about
-            </label>
-            <textarea
-              className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400 resize-none"
-              rows={2}
-              placeholder="e.g., Budget is fixed, no new headcount..."
-              value={form.constraints}
-              onChange={(e) => setForm({...form, constraints: e.target.value})}
-            />
+            <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">Constraints {form.receiverName} should know about</label>
+            <textarea className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400 resize-none" rows={2} placeholder="e.g., Budget is fixed, no new headcount..." value={form.constraints} onChange={(e) => setForm({...form, constraints: e.target.value})} />
           </div>
-
           <div>
-            <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">
-              Dependencies
-            </label>
-            <textarea
-              className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400 resize-none"
-              rows={2}
-              placeholder="e.g., IT delivering the new CRM by March..."
-              value={form.dependencies}
-              onChange={(e) => setForm({...form, dependencies: e.target.value})}
-            />
+            <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">Dependencies</label>
+            <textarea className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400 resize-none" rows={2} placeholder="e.g., IT delivering the new CRM by March..." value={form.dependencies} onChange={(e) => setForm({...form, dependencies: e.target.value})} />
           </div>
         </div>
-
         <div className="mt-10 pt-10 border-t border-stone-200 space-y-4">
-          <div className={`p-6 border-2 transition-colors ${
-            form.setterQ1 === null ? 'border-stone-200' : (form.setterQ1 ? 'border-stone-900 bg-stone-50' : 'border-amber-500 bg-amber-50')
-          }`}>
-            <p className="text-stone-900 mb-4">
-              Have you explained the context — not just the number?
-            </p>
+          <div className={`p-6 border-2 transition-colors ${form.setterQ1 === null ? 'border-stone-200' : (form.setterQ1 ? 'border-stone-900 bg-stone-50' : 'border-amber-500 bg-amber-50')}`}>
+            <p className="text-stone-900 mb-4">Have you explained the context — not just the number?</p>
             <div className="flex gap-3">
-              <button
-                type="button"
-                onClick={() => setForm({...form, setterQ1: true})}
-                className={`flex-1 py-3 font-medium text-sm transition-colors ${
-                  form.setterQ1 === true 
-                    ? 'bg-stone-900 text-white' 
-                    : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
-                }`}
-              >
-                YES
-              </button>
-              <button
-                type="button"
-                onClick={() => setForm({...form, setterQ1: false})}
-                className={`flex-1 py-3 font-medium text-sm transition-colors ${
-                  form.setterQ1 === false 
-                    ? 'bg-amber-500 text-white' 
-                    : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
-                }`}
-              >
-                NOT YET
-              </button>
+              <button type="button" onClick={() => setForm({...form, setterQ1: true})} className={`flex-1 py-3 font-medium text-sm transition-colors ${form.setterQ1 === true ? 'bg-stone-900 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'}`}>YES</button>
+              <button type="button" onClick={() => setForm({...form, setterQ1: false})} className={`flex-1 py-3 font-medium text-sm transition-colors ${form.setterQ1 === false ? 'bg-amber-500 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'}`}>NOT YET</button>
             </div>
           </div>
-
-          <div className={`p-6 border-2 transition-colors ${
-            form.setterQ2 === null ? 'border-stone-200' : (form.setterQ2 ? 'border-stone-900 bg-stone-50' : 'border-amber-500 bg-amber-50')
-          }`}>
-            <p className="text-stone-900 mb-4">
-              Will you invite {form.receiverName} to flag concerns before finalizing?
-            </p>
+          <div className={`p-6 border-2 transition-colors ${form.setterQ2 === null ? 'border-stone-200' : (form.setterQ2 ? 'border-stone-900 bg-stone-50' : 'border-amber-500 bg-amber-50')}`}>
+            <p className="text-stone-900 mb-4">Will you invite {form.receiverName} to flag concerns before finalizing?</p>
             <div className="flex gap-3">
-              <button
-                type="button"
-                onClick={() => setForm({...form, setterQ2: true})}
-                className={`flex-1 py-3 font-medium text-sm transition-colors ${
-                  form.setterQ2 === true 
-                    ? 'bg-stone-900 text-white' 
-                    : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
-                }`}
-              >
-                YES
-              </button>
-              <button
-                type="button"
-                onClick={() => setForm({...form, setterQ2: false})}
-                className={`flex-1 py-3 font-medium text-sm transition-colors ${
-                  form.setterQ2 === false 
-                    ? 'bg-amber-500 text-white' 
-                    : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
-                }`}
-              >
-                NO
-              </button>
+              <button type="button" onClick={() => setForm({...form, setterQ2: true})} className={`flex-1 py-3 font-medium text-sm transition-colors ${form.setterQ2 === true ? 'bg-stone-900 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'}`}>YES</button>
+              <button type="button" onClick={() => setForm({...form, setterQ2: false})} className={`flex-1 py-3 font-medium text-sm transition-colors ${form.setterQ2 === false ? 'bg-amber-500 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'}`}>NO</button>
             </div>
           </div>
         </div>
-
         <div className="flex justify-between mt-12">
-          <button
-            onClick={() => setStep('goal')}
-            className="text-stone-500 text-sm hover:text-stone-900 transition-colors"
-          >
-            ← Back
-          </button>
-          <button
-            onClick={handleSubmit}
-            disabled={form.setterQ1 !== true || form.setterQ2 !== true || isSubmitting}
-            className="px-8 py-3 bg-stone-900 text-white font-medium tracking-wide hover:bg-stone-800 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-          >
-            {isSubmitting ? 'CREATING...' : `SEND TO ${form.receiverName.toUpperCase()}`}
-          </button>
+          <button onClick={() => setStep('goal')} className="text-stone-500 text-sm hover:text-stone-900 transition-colors">&larr; Back</button>
+          <button onClick={handleSubmit} disabled={form.setterQ1 !== true || form.setterQ2 !== true || isSubmitting} className="px-8 py-3 bg-stone-900 text-white font-medium tracking-wide hover:bg-stone-800 disabled:opacity-30 disabled:cursor-not-allowed transition-colors">{isSubmitting ? 'CREATING...' : `SEND TO ${form.receiverName.toUpperCase()}`}</button>
         </div>
       </div>
     )
@@ -463,74 +238,30 @@ export default function NewCheckpoint() {
   return (
     <div className="animate-fade-in text-center">
       <div className="mb-10">
-        <p className="text-[10px] uppercase tracking-[0.35em] text-stone-400 mb-6">
-          Ready to Send
-        </p>
-        <h1 className="font-serif text-3xl font-light text-stone-900 mb-4">
-          Share with {form.receiverName}
-        </h1>
-        <p className="text-stone-500 text-sm">
-          They can review before your conversation.
-        </p>
+        <p className="text-[10px] uppercase tracking-[0.35em] text-stone-400 mb-6">Ready to Send</p>
+        <h1 className="font-serif text-3xl font-light text-stone-900 mb-4">Share with {form.receiverName}</h1>
+        <p className="text-stone-500 text-sm">They can review before your conversation.</p>
       </div>
-
       <div className="bg-stone-100 p-6 mb-6 text-left">
         <p className="text-[10px] uppercase tracking-wider text-stone-500 mb-3">Share Link</p>
         <div className="flex gap-2">
-          <input
-            type="text"
-            readOnly
-            value={`${typeof window !== 'undefined' ? window.location.origin : ''}/c/${checkpointId}`}
-            className="flex-1 px-4 py-3 border border-stone-300 bg-white text-stone-700 text-sm"
-          />
-          <button
-            onClick={copyLink}
-            className={`px-6 py-3 font-medium text-sm transition-colors ${
-              copied 
-                ? 'bg-stone-900 text-white' 
-                : 'bg-stone-200 text-stone-700 hover:bg-stone-300'
-            }`}
-          >
-            {copied ? 'COPIED' : 'COPY'}
-          </button>
+          <input type="text" readOnly value={`${typeof window !== 'undefined' ? window.location.origin : ''}/c/${checkpointId}`} className="flex-1 px-4 py-3 border border-stone-300 bg-white text-stone-700 text-sm" />
+          <button onClick={copyLink} className={`px-6 py-3 font-medium text-sm transition-colors ${copied ? 'bg-stone-900 text-white' : 'bg-stone-200 text-stone-700 hover:bg-stone-300'}`}>{copied ? 'COPIED' : 'COPY'}</button>
         </div>
-        
-        
-          href={`mailto:${form.receiverEmail}?subject=${encodeURIComponent(`Please review: ${form.goalDescription}`)}&body=${encodeURIComponent(`Hi ${form.receiverName},\n\nI'd like to discuss a goal with you. Before we meet, please take a few minutes to review the details and note any questions or concerns:\n\n${typeof window !== 'undefined' ? window.location.origin : ''}/c/${checkpointId}\n\nGoal: ${form.goalDescription}\nTarget: ${form.targetValue} by ${form.deadline}\n\nThanks,\n${form.setterName}`)}`}
-          className="block w-full mt-4 py-3 border-2 border-stone-900 text-stone-900 font-medium text-sm text-center hover:bg-stone-900 hover:text-white transition-colors"
-        >
-          SEND VIA EMAIL
-        </a>
+        <a href={`mailto:${form.receiverEmail}?subject=${encodeURIComponent(`Please review: ${form.goalDescription}`)}&body=${encodeURIComponent(`Hi ${form.receiverName},\n\nI'd like to discuss a goal with you. Before we meet, please take a few minutes to review the details and note any questions or concerns:\n\n${typeof window !== 'undefined' ? window.location.origin : ''}/c/${checkpointId}\n\nGoal: ${form.goalDescription}\nTarget: ${form.targetValue} by ${form.deadline}\n\nThanks,\n${form.setterName}`)}`} className="block w-full mt-4 py-3 border-2 border-stone-900 text-stone-900 font-medium text-sm text-center hover:bg-stone-900 hover:text-white transition-colors">SEND VIA EMAIL</a>
       </div>
-
       <div className="bg-stone-100 p-6 mb-10 text-left">
-        <p className="text-[10px] uppercase tracking-wider text-stone-500 mb-3">
-          What {form.receiverName} Will See
-        </p>
+        <p className="text-[10px] uppercase tracking-wider text-stone-500 mb-3">What {form.receiverName} Will See</p>
         <ul className="space-y-2 text-sm text-stone-700">
-          <li>• The goal: {form.goalDescription}</li>
-          <li>• Target: {form.targetValue} by {form.deadline}</li>
-          <li>• Your assumptions and constraints</li>
-          <li>• Space to note questions</li>
+          <li>&#8226; The goal: {form.goalDescription}</li>
+          <li>&#8226; Target: {form.targetValue} by {form.deadline}</li>
+          <li>&#8226; Your assumptions and constraints</li>
+          <li>&#8226; Space to note questions</li>
         </ul>
       </div>
-
-      <button
-        onClick={() => router.push(`/c/${checkpointId}/session`)}
-        className="w-full py-4 bg-stone-900 text-white font-medium tracking-wide hover:bg-stone-800 transition-colors mb-3"
-      >
-        START LIVE SESSION
-      </button>
-      <p className="text-xs text-stone-400 mb-10">
-        Use when {form.receiverName} is ready to complete the checkpoint together
-      </p>
-
-      <button
-        onClick={() => router.push('/')}
-        className="text-stone-500 text-sm hover:text-stone-900 transition-colors"
-      >
-        Create another checkpoint
-      </button>
+      <button onClick={() => router.push(`/c/${checkpointId}/session`)} className="w-full py-4 bg-stone-900 text-white font-medium tracking-wide hover:bg-stone-800 transition-colors mb-3">START LIVE SESSION</button>
+      <p className="text-xs text-stone-400 mb-10">Use when {form.receiverName} is ready to complete the checkpoint together</p>
+      <button onClick={() => router.push('/')} className="text-stone-500 text-sm hover:text-stone-900 transition-colors">Create another checkpoint</button>
     </div>
   )
 }
