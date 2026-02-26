@@ -11,6 +11,7 @@ export default function CheckpointReview({ params }: { params: { id: string } })
   const [loading, setLoading] = useState(true)
   const [questions, setQuestions] = useState('')
   const [concerns, setConcerns] = useState('')
+  const [receiverConfidence, setReceiverConfidence] = useState('')
 
   useEffect(() => {
     async function load() {
@@ -19,6 +20,7 @@ export default function CheckpointReview({ params }: { params: { id: string } })
         setCheckpoint(cp)
         setQuestions(cp.receiver_questions || '')
         setConcerns(cp.receiver_concerns || '')
+        setReceiverConfidence(cp.receiver_confidence || '')
         const f = await getCheckpointFiles(params.id)
         setFiles(f)
       }
@@ -31,6 +33,7 @@ export default function CheckpointReview({ params }: { params: { id: string } })
     await updateCheckpoint(params.id, {
       receiver_questions: questions,
       receiver_concerns: concerns,
+      receiver_confidence: receiverConfidence || null,
       receiver_reviewed_at: new Date().toISOString(),
       status: 'ready_for_session'
     })
@@ -155,6 +158,29 @@ export default function CheckpointReview({ params }: { params: { id: string } })
         </p>
 
         <div className="space-y-6">
+          {/* Confidence */}
+          <div>
+            <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">
+              Likelihood of Hitting This Goal
+            </label>
+            <div className="grid grid-cols-3 gap-2">
+              {['Low', 'Medium', 'High'].map(level => (
+                <button
+                  key={level}
+                  type="button"
+                  onClick={() => setReceiverConfidence(level.toLowerCase())}
+                  className={`py-3 text-sm font-medium transition-colors ${
+                    receiverConfidence === level.toLowerCase()
+                      ? 'bg-stone-900 text-white'
+                      : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                  }`}
+                >
+                  {level}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <div>
             <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">
               Questions you want to ask
