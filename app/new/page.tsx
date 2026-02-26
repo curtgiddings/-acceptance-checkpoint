@@ -134,7 +134,7 @@ export default function NewCheckpoint() {
             <textarea className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400 resize-none" rows={2} placeholder="Why is this target important?" value={form.context} onChange={(e) => setForm({...form, context: e.target.value})} />
           </div>
           <div>
-            <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">Likelihood of Hitting This Goal</label>
+            <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">Confidence in Hitting This Goal</label>
             <div className="grid grid-cols-3 gap-2">
               {['Low', 'Medium', 'High'].map(level => (
                 <button key={level} type="button" onClick={() => setForm({...form, setterConfidence: level.toLowerCase()})} className={`py-3 text-sm font-medium transition-colors ${form.setterConfidence === level.toLowerCase() ? 'bg-stone-900 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'}`}>{level}</button>
