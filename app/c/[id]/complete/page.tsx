@@ -48,7 +48,7 @@ export default function Complete({ params }: { params: { id: string } }) {
   }
 
   const confidenceLabel = (val: string | null) => {
-    if (!val) return '—'
+    if (!val) return '\u2014'
     return val.charAt(0).toUpperCase() + val.slice(1)
   }
 
@@ -56,7 +56,6 @@ export default function Complete({ params }: { params: { id: string } }) {
 
   return (
     <div className="animate-fade-in">
-      {/* Header */}
       <div className="text-center mb-12">
         <p className="text-[10px] uppercase tracking-[0.35em] text-stone-400 mb-6">
           Checkpoint Complete
@@ -72,13 +71,12 @@ export default function Complete({ params }: { params: { id: string } }) {
         </p>
       </div>
 
-      {/* Status */}
       <div className="flex justify-center gap-6 mb-12">
         <div className="text-center">
           <div className={`w-12 h-12 mx-auto mb-2 flex items-center justify-center font-serif text-lg ${
             checkpoint.live_q1 ? 'bg-stone-900 text-white' : 'bg-amber-500 text-white'
           }`}>
-            {checkpoint.live_q1 ? '✓' : '!'}
+            {checkpoint.live_q1 ? '\u2713' : '!'}
           </div>
           <p className="text-[10px] uppercase tracking-wider text-stone-500">Understood</p>
         </div>
@@ -86,7 +84,7 @@ export default function Complete({ params }: { params: { id: string } }) {
           <div className={`w-12 h-12 mx-auto mb-2 flex items-center justify-center font-serif text-lg ${
             checkpoint.live_q2 ? 'bg-stone-900 text-white' : 'bg-amber-500 text-white'
           }`}>
-            {checkpoint.live_q2 ? '✓' : '!'}
+            {checkpoint.live_q2 ? '\u2713' : '!'}
           </div>
           <p className="text-[10px] uppercase tracking-wider text-stone-500">Realistic</p>
         </div>
@@ -94,13 +92,12 @@ export default function Complete({ params }: { params: { id: string } }) {
           <div className={`w-12 h-12 mx-auto mb-2 flex items-center justify-center font-serif text-lg ${
             checkpoint.live_q3 ? 'bg-stone-900 text-white' : 'bg-amber-500 text-white'
           }`}>
-            {checkpoint.live_q3 ? '✓' : '!'}
+            {checkpoint.live_q3 ? '\u2713' : '!'}
           </div>
           <p className="text-[10px] uppercase tracking-wider text-stone-500">Committed</p>
         </div>
       </div>
 
-      {/* Confidence Comparison */}
       {(checkpoint.setter_confidence || checkpoint.receiver_confidence) && (
         <div className={`p-6 mb-10 border-2 ${hasConfidenceGap ? 'border-amber-500 bg-amber-50' : 'border-stone-200 bg-stone-50'}`}>
           <p className="text-[10px] uppercase tracking-wider text-stone-500 mb-4 text-center">
@@ -134,7 +131,6 @@ export default function Complete({ params }: { params: { id: string } }) {
         </div>
       )}
 
-      {/* Needs */}
       {!isAccepted && checkpoint.live_needs && (
         <div className="border-2 border-amber-500 bg-amber-50 p-6 mb-10">
           <p className="text-[10px] uppercase tracking-wider text-amber-700 mb-2">
@@ -144,7 +140,6 @@ export default function Complete({ params }: { params: { id: string } }) {
         </div>
       )}
 
-      {/* Record */}
       <div className="bg-stone-100 p-6 mb-10">
         <p className="text-[10px] uppercase tracking-wider text-stone-500 mb-4">
           {isAccepted ? 'Acceptance Record' : 'Checkpoint Summary'}
@@ -188,13 +183,12 @@ export default function Complete({ params }: { params: { id: string } }) {
             <p className="text-[10px] uppercase tracking-wider text-stone-400 mb-1">Target Source</p>
             <p className="text-sm text-stone-700">
               {sourceLabel[checkpoint.source_type as keyof typeof sourceLabel]}
-              {checkpoint.source_description && ` — ${checkpoint.source_description}`}
+              {checkpoint.source_description && ` \u2014 ${checkpoint.source_description}`}
             </p>
           </div>
         )}
       </div>
 
-      {/* CTA */}
       <Link
         href="/"
         className="block w-full py-4 bg-stone-900 text-white font-medium tracking-wide text-center hover:bg-stone-800 transition-colors"
@@ -204,14 +198,3 @@ export default function Complete({ params }: { params: { id: string } }) {
     </div>
   )
 }
-```
-
-Replace everything in `app/c/[id]/complete/page.tsx` with this, save, then:
-```
-git add .
-```
-```
-git commit -m "Add confidence comparison to results page"
-```
-```
-git push
