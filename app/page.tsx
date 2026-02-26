@@ -1,9 +1,7 @@
 import Link from 'next/link'
-
 export default function Home() {
   return (
     <div className="animate-fade-in">
-      {/* Header */}
       <div className="text-center mb-16">
         <p className="text-[10px] uppercase tracking-[0.35em] text-stone-400 mb-6">
           Goal Setting Framework
@@ -15,8 +13,6 @@ export default function Home() {
           Ensure goals are genuinely accepted — not just assigned.
         </p>
       </div>
-
-      {/* CTAs */}
       <div className="space-y-3 mb-20">
         <Link
           href="/new"
@@ -32,8 +28,6 @@ export default function Home() {
           I RECEIVED A GOAL
         </Link>
       </div>
-
-      {/* Process */}
       <div className="border-t border-stone-200 pt-12 mb-12">
         <p className="text-[10px] uppercase tracking-[0.35em] text-stone-400 mb-8 text-center">
           How It Works
@@ -54,19 +48,15 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-      {/* Framework */}
       <div className="border-t border-stone-200 pt-12">
         <p className="text-[10px] uppercase tracking-[0.35em] text-stone-400 mb-6 text-center">
           The Framework
         </p>
         <p className="text-center text-stone-600 text-sm leading-relaxed">
           For a goal to be genuinely accepted, it must be<br />
-          <span className="font-serif italic">Understood</span> · <span className="font-serif italic">Realistic</span> · <span className="font-serif italic">Committed</span>
+          <span className="font-serif italic">Observable</span> · <span className="font-serif italic">Irrevocable</span> · <span className="font-serif italic">Voluntary</span>
         </p>
       </div>
-
-      {/* Footer */}
       <div className="mt-16 pt-8 border-t border-stone-200 text-center">
         <p className="text-[10px] uppercase tracking-[0.25em] text-stone-400">
           Based on Salancik&apos;s Commitment Theory (1977)
