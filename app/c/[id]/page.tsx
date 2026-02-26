@@ -67,42 +67,30 @@ export default function CheckpointReview({ params }: { params: { id: string } })
 
   return (
     <div className="animate-fade-in">
-      {/* Header */}
       <div className="text-center mb-10">
-        <p className="text-[10px] uppercase tracking-[0.35em] text-stone-400 mb-6">
-          Review Before Meeting
-        </p>
-        <h1 className="font-serif text-3xl font-light text-stone-900 mb-3">
-          {checkpoint.setter_name} shared<br />a goal with you
-        </h1>
-        <p className="text-stone-500 text-sm">
-          Review the details and note any questions.
-        </p>
+        <p className="text-[10px] uppercase tracking-[0.35em] text-stone-400 mb-6">Review Before Meeting</p>
+        <h1 className="font-serif text-3xl font-light text-stone-900 mb-3">{checkpoint.setter_name} shared<br />a goal with you</h1>
+        <p className="text-stone-500 text-sm">Review the details and note any questions.</p>
       </div>
-
-      {/* Goal */}
       <div className="bg-stone-100 p-6 mb-6">
         <p className="text-[10px] uppercase tracking-wider text-stone-500 mb-2">The Goal</p>
         <p className="font-serif text-xl text-stone-900 mb-1">{checkpoint.goal_description}</p>
         <p className="text-sm text-stone-500">{checkpoint.target_value} by {checkpoint.deadline}</p>
-        
         {checkpoint.context && (
           <div className="mt-6 pt-6 border-t border-stone-200">
             <p className="text-[10px] uppercase tracking-wider text-stone-500 mb-1">Context</p>
             <p className="text-sm text-stone-700">{checkpoint.context}</p>
           </div>
         )}
-        
         {checkpoint.source_type && (
           <div className="mt-6 pt-6 border-t border-stone-200">
             <p className="text-[10px] uppercase tracking-wider text-stone-500 mb-1">Source</p>
             <p className="text-sm text-stone-700">
               {sourceLabel[checkpoint.source_type as keyof typeof sourceLabel]}
-              {checkpoint.source_description && ` — ${checkpoint.source_description}`}
+              {checkpoint.source_description && ` \u2014 ${checkpoint.source_description}`}
             </p>
           </div>
         )}
-        
         {files.length > 0 && (
           <div className="mt-6 pt-6 border-t border-stone-200">
             <p className="text-[10px] uppercase tracking-wider text-stone-500 mb-3">Attached Documents</p>
@@ -110,36 +98,27 @@ export default function CheckpointReview({ params }: { params: { id: string } })
               {files.map((file) => (
                 <div key={file.id} className="flex items-center justify-between py-3 px-4 bg-white">
                   <span className="text-sm text-stone-700 truncate">{file.file_name}</span>
-                  <button className="text-xs font-medium text-stone-500 hover:text-stone-900 transition-colors">
-                    VIEW
-                  </button>
+                  <button className="text-xs font-medium text-stone-500 hover:text-stone-900 transition-colors">VIEW</button>
                 </div>
               ))}
             </div>
           </div>
         )}
       </div>
-
-      {/* Assumptions from Setter */}
       <div className="border-2 border-stone-200 p-6 mb-10">
-        <p className="text-[10px] uppercase tracking-wider text-stone-500 mb-4">
-          From {checkpoint.setter_name}
-        </p>
-        
+        <p className="text-[10px] uppercase tracking-wider text-stone-500 mb-4">From {checkpoint.setter_name}</p>
         {checkpoint.setter_assumptions && (
           <div className="mb-4">
             <p className="text-[10px] uppercase tracking-wider text-stone-400 mb-1">Assumptions</p>
             <p className="text-sm text-stone-800">{checkpoint.setter_assumptions}</p>
           </div>
         )}
-        
         {checkpoint.setter_constraints && (
           <div className="mb-4">
             <p className="text-[10px] uppercase tracking-wider text-stone-400 mb-1">Constraints</p>
             <p className="text-sm text-stone-800">{checkpoint.setter_constraints}</p>
           </div>
         )}
-        
         {checkpoint.setter_dependencies && (
           <div>
             <p className="text-[10px] uppercase tracking-wider text-stone-400 mb-1">Dependencies</p>
@@ -147,78 +126,30 @@ export default function CheckpointReview({ params }: { params: { id: string } })
           </div>
         )}
       </div>
-
-      {/* Your Preparation */}
       <div className="border-t border-stone-200 pt-10 mb-10">
-        <p className="text-[10px] uppercase tracking-[0.35em] text-stone-400 mb-6 text-center">
-          Your Preparation
-        </p>
-        <p className="text-stone-500 text-sm mb-6 text-center">
-          Note anything you want to discuss with {checkpoint.setter_name}.
-        </p>
-
+        <p className="text-[10px] uppercase tracking-[0.35em] text-stone-400 mb-6 text-center">Your Preparation</p>
+        <p className="text-stone-500 text-sm mb-6 text-center">Note anything you want to discuss with {checkpoint.setter_name}.</p>
         <div className="space-y-6">
-          {/* Confidence */}
           <div>
-            <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">
-              Likelihood of Hitting This Goal
-            </label>
+            <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">Confidence in Hitting This Goal</label>
             <div className="grid grid-cols-3 gap-2">
               {['Low', 'Medium', 'High'].map(level => (
-                <button
-                  key={level}
-                  type="button"
-                  onClick={() => setReceiverConfidence(level.toLowerCase())}
-                  className={`py-3 text-sm font-medium transition-colors ${
-                    receiverConfidence === level.toLowerCase()
-                      ? 'bg-stone-900 text-white'
-                      : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
-                  }`}
-                >
-                  {level}
-                </button>
+                <button key={level} type="button" onClick={() => setReceiverConfidence(level.toLowerCase())} className={`py-3 text-sm font-medium transition-colors ${receiverConfidence === level.toLowerCase() ? 'bg-stone-900 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'}`}>{level}</button>
               ))}
             </div>
           </div>
-
           <div>
-            <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">
-              Questions you want to ask
-            </label>
-            <textarea
-              className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400 resize-none"
-              rows={2}
-              placeholder="What do you need clarified?"
-              value={questions}
-              onChange={(e) => setQuestions(e.target.value)}
-            />
+            <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">Questions you want to ask</label>
+            <textarea className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400 resize-none" rows={2} placeholder="What do you need clarified?" value={questions} onChange={(e) => setQuestions(e.target.value)} />
           </div>
-
           <div>
-            <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">
-              Initial concerns (if any)
-            </label>
-            <textarea
-              className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400 resize-none"
-              rows={2}
-              placeholder="What worries you about this target?"
-              value={concerns}
-              onChange={(e) => setConcerns(e.target.value)}
-            />
+            <label className="block text-[10px] uppercase tracking-wider text-stone-500 mb-2">Initial concerns (if any)</label>
+            <textarea className="w-full px-4 py-3 border border-stone-300 bg-white text-stone-900 placeholder-stone-400 resize-none" rows={2} placeholder="What worries you about this target?" value={concerns} onChange={(e) => setConcerns(e.target.value)} />
           </div>
         </div>
       </div>
-
-      {/* CTA */}
-      <button
-        onClick={handleReady}
-        className="w-full py-4 bg-stone-900 text-white font-medium tracking-wide hover:bg-stone-800 transition-colors"
-      >
-        I&apos;M READY FOR THE CONVERSATION
-      </button>
-      <p className="text-xs text-center mt-3 text-stone-400">
-        You&apos;ll complete the checkpoint with {checkpoint.setter_name}
-      </p>
+      <button onClick={handleReady} className="w-full py-4 bg-stone-900 text-white font-medium tracking-wide hover:bg-stone-800 transition-colors">I&apos;M READY FOR THE CONVERSATION</button>
+      <p className="text-xs text-center mt-3 text-stone-400">You&apos;ll complete the checkpoint with {checkpoint.setter_name}</p>
     </div>
   )
 }
