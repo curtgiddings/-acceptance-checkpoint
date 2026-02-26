@@ -47,6 +47,13 @@ export default function Complete({ params }: { params: { id: string } }) {
     other: 'Other'
   }
 
+  const confidenceLabel = (val: string | null) => {
+    if (!val) return '—'
+    return val.charAt(0).toUpperCase() + val.slice(1)
+  }
+
+  const hasConfidenceGap = checkpoint.setter_confidence && checkpoint.receiver_confidence && checkpoint.setter_confidence !== checkpoint.receiver_confidence
+
   return (
     <div className="animate-fade-in">
       {/* Header */}
@@ -92,6 +99,40 @@ export default function Complete({ params }: { params: { id: string } }) {
           <p className="text-[10px] uppercase tracking-wider text-stone-500">Committed</p>
         </div>
       </div>
+
+      {/* Confidence Comparison */}
+      {(checkpoint.setter_confidence || checkpoint.receiver_confidence) && (
+        <div className={`p-6 mb-10 border-2 ${hasConfidenceGap ? 'border-amber-500 bg-amber-50' : 'border-stone-200 bg-stone-50'}`}>
+          <p className="text-[10px] uppercase tracking-wider text-stone-500 mb-4 text-center">
+            Likelihood of Hitting This Goal
+          </p>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="text-center">
+              <p className="text-[10px] uppercase tracking-wider text-stone-400 mb-2">
+                {checkpoint.setter_name}
+              </p>
+              <p className={`font-serif text-2xl ${hasConfidenceGap ? 'text-amber-700' : 'text-stone-900'}`}>
+                {confidenceLabel(checkpoint.setter_confidence)}
+              </p>
+              <p className="text-[10px] uppercase tracking-wider text-stone-400 mt-1">Setter</p>
+            </div>
+            <div className="text-center">
+              <p className="text-[10px] uppercase tracking-wider text-stone-400 mb-2">
+                {checkpoint.receiver_name}
+              </p>
+              <p className={`font-serif text-2xl ${hasConfidenceGap ? 'text-amber-700' : 'text-stone-900'}`}>
+                {confidenceLabel(checkpoint.receiver_confidence)}
+              </p>
+              <p className="text-[10px] uppercase tracking-wider text-stone-400 mt-1">Receiver</p>
+            </div>
+          </div>
+          {hasConfidenceGap && (
+            <p className="text-xs text-amber-700 text-center mt-4 pt-4 border-t border-amber-200">
+              Confidence gap detected — this is a key conversation point.
+            </p>
+          )}
+        </div>
+      )}
 
       {/* Needs */}
       {!isAccepted && checkpoint.live_needs && (
@@ -163,3 +204,14 @@ export default function Complete({ params }: { params: { id: string } }) {
     </div>
   )
 }
+```
+
+Replace everything in `app/c/[id]/complete/page.tsx` with this, save, then:
+```
+git add .
+```
+```
+git commit -m "Add confidence comparison to results page"
+```
+```
+git push
